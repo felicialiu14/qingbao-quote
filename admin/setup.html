@@ -1,0 +1,7 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="referrer" content="no-referrer"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src https://*.supabase.co; img-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"><title>设置管理员密码 · 轻报</title><link rel="stylesheet" href="admin.css"></head>
+<body><header class="admin-top"><a class="wordmark" href="../"><span>轻</span>轻报 <small>管理后台</small></a></header>
+<main class="admin-main"><section class="login-panel panel"><span class="eyebrow">ACCOUNT SETUP</span><h1>设置你的登录密码</h1><p class="lead">设置完成后，使用管理员邮箱和密码登录后台。此专属链接只能使用一次，请勿转发。</p>
+<form id="passwordForm" hidden><label for="newPassword">新密码</label><input id="newPassword" type="password" autocomplete="new-password" minlength="12" maxlength="128" required placeholder="至少 12 位，可使用长句作为密码"><label for="confirmPassword">确认新密码</label><input id="confirmPassword" type="password" autocomplete="new-password" minlength="12" maxlength="128" required placeholder="再输入一次"><button class="primary" id="savePassword" type="submit">保存密码</button></form>
+<p id="setupStatus" class="status" role="status" aria-live="polite"></p><p id="complete" hidden><a href="./">前往登录后台 →</a></p><p class="small">密码只提交给本工具的认证服务，不会写入 GitHub，也不需要发给任何人。</p></section></main>
+<script src="../analytics-config.js"></script><script type="module" src="setup.js"></script></body></html>
