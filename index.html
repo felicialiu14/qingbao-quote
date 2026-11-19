@@ -7,6 +7,7 @@
   <meta name="description" content="光储产品批量报价工具，按品类自动匹配计算公式，自由添加产品，实时生成报价。">
   <title>轻报 · 光储产品报价</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="analytics.css">
 </head>
 <body>
   <aside class="sidebar">
@@ -49,5 +50,6 @@
   <dialog id="quoteDialog" class="quote-dialog"><div class="dialog-heading no-print"><div><span class="eyebrow">QUOTATION</span><h2>报价单预览</h2></div><button class="icon-button" data-close="quoteDialog" aria-label="关闭报价单">×</button></div><div id="quoteContent"></div><div class="dialog-actions no-print"><button class="button secondary" id="copyBtn">复制报价</button><button class="button secondary" id="downloadBtn">导出 CSV</button><button class="button primary" id="printBtn">打印 / 保存 PDF</button></div><p class="quote-note no-print">展示产品、功率 / 容量、最终报价及单片金额，不包含成本与利润点。</p></dialog>
   <dialog id="confirmDialog" class="confirm-dialog"><h2 id="confirmTitle"></h2><p id="confirmMessage"></p><div class="dialog-actions"><button class="button secondary" id="confirmCancel">取消</button><button class="button primary" id="confirmOk">确认</button></div></dialog>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="analytics-config.js"></script><script src="analytics.js"></script>
   <script src="calc.js"></script><script src="app.js"></script>
 </body></html>

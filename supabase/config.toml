@@ -1,0 +1,6 @@
+[functions.quote-collect]
+# Intentionally anonymous, append-only analytics endpoint. It exposes no reads.
+# The handler verifies the project publishable API key, origin, payload and edge
+# IP; Postgres enforces limits. Modern API keys are not JWTs, so verification is
+# in the handler. This API key identifies the project, not an administrator.
+verify_jwt = false

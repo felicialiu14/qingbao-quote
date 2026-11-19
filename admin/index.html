@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="referrer" content="no-referrer"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src https://*.supabase.co; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'"><title>管理后台 · 轻报</title><link rel="stylesheet" href="admin.css"></head>
+<body>
+<header class="admin-top"><a href="../" class="wordmark"><span>轻</span>轻报 <small>管理后台</small></a><div class="top-actions"><a href="../">打开报价工具</a><button id="logout" type="button" hidden>退出登录</button></div></header>
+<main class="admin-main">
+  <section id="loginPanel" class="login-panel panel">
+    <span class="eyebrow">PRIVATE WORKSPACE</span><h1>查看工具的使用情况</h1><p class="lead">使用已开通的管理员邮箱登录。<br>访问记录仅对管理员开放。</p>
+    <div id="setupNotice" class="message" hidden>统计后台尚未完成连接。报价工具仍可正常使用；当前不会采集访问记录。</div>
+    <form id="loginForm"><label for="email">管理员邮箱</label><input id="email" name="email" type="email" autocomplete="username" placeholder="请输入你的管理员邮箱" required maxlength="254"><label for="password">登录密码</label><input id="password" name="password" type="password" autocomplete="current-password" placeholder="请输入登录密码" required maxlength="256"><button id="loginButton" class="primary" type="submit">登录后台</button></form>
+    <p id="loginMessage" class="status" role="status" aria-live="polite"></p><p class="small">登录状态保存在当前标签页，最多持续 8 小时。请勿在共用电脑上保留登录状态。</p>
+  </section>
+  <section id="dashboard" hidden>
+    <div class="page-title"><div><span class="eyebrow">USAGE OVERVIEW</span><h1>使用情况</h1><p id="updatedAt" class="muted">正在获取记录</p></div><button id="refresh" type="button">刷新数据</button></div>
+    <div class="filters panel"><div><label for="days">统计时间</label><select id="days"><option value="1">今天</option><option value="7" selected>近 7 天</option><option value="30">近 30 天</option></select></div><form id="searchForm"><label for="ipSearch">查找 IP</label><div class="search-controls"><input id="ipSearch" placeholder="输入完整 IP 或前缀" maxlength="45" autocomplete="off"><button type="submit">查询</button><button id="clearSearch" type="button">清除</button></div></form></div>
+    <p id="dashboardMessage" class="status" role="status" aria-live="polite"></p>
+    <div class="metrics"><article class="metric"><span>页面访问次数</span><strong id="views">—</strong><small>同一 IP 的重复访问会计数</small></article><article class="metric"><span>访问 IP 数</span><strong id="ips">—</strong><small>不等同于访问人数</small></article><article class="metric"><span>生成报价单次数</span><strong id="quotes">—</strong><small>成功打开报价单预览时计数</small></article><article class="metric accent"><span>实际使用 IP 数</span><strong id="activeIps">—</strong><small>至少生成过一份报价单</small></article></div>
+    <section class="panel trend-panel"><div class="section-title"><h2>每日使用趋势</h2><span class="muted">北京时间</span></div><div id="trend" class="trend" aria-label="每日访问与报价次数"></div><div class="legend"><span><i class="view-key"></i>访问次数</span><span><i class="quote-key"></i>生成报价单</span></div></section>
+    <section class="panel records-panel"><div class="section-title"><div><h2>访问 IP 明细</h2><p class="muted">按最近访问时间排序，计数随上方筛选条件变化</p></div><button id="export" type="button" disabled>导出当前页</button></div><div class="table-scroll"><table><thead><tr><th>公网 IP</th><th>访问次数</th><th>报价单次数</th><th>首次记录</th><th>最近记录</th><th>使用情况</th></tr></thead><tbody id="records"></tbody></table></div><div id="empty" class="empty" hidden><strong>暂时没有统计记录</strong><p>访客同意统计后，访问和生成报价单会显示在这里。</p></div><div class="pagination"><span id="pageInfo">第 1 页</span><div><button id="previous" type="button">上一页</button><button id="next" type="button">下一页</button></div></div></section>
+    <p class="footnote">仅统计同意记录的访问；浏览器拦截和网络异常可能造成漏记。共享网络可能共用 IP，IP 地址也可能变化。应用内保留近 30 天记录，不包含报价成本、利润或客户内容。</p>
+  </section>
+</main>
+<script src="../analytics-config.js"></script><script src="admin.js"></script>
+</body></html>
