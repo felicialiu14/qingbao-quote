@@ -10,6 +10,17 @@
   <link rel="stylesheet" href="analytics.css">
 </head>
 <body>
+  <section id="accessGate" class="access-gate" aria-labelledby="accessTitle"><div class="access-card">
+    <div class="access-brand"><span>轻</span>轻报 <small>QINGBAO</small></div>
+    <h1 id="accessTitle">同意使用统计后，进入报价工具</h1>
+    <p class="access-intro">在线报价工具需要统计访问及使用情况。请先阅读下面的说明，再决定是否进入。</p>
+    <div class="access-summary"><strong>我们会记录</strong><ul><li>公网 IP 和访问时间</li><li>页面访问次数、成功生成报价单的次数</li><li>当前标签页内的随机会话编号</li></ul><p>应用内记录保留 30 天，仅管理员可查看。<br><strong>不上传报价成本、利润、产品明细或客户内容。</strong></p><a href="privacy.html" target="_blank" rel="noopener noreferrer">查看完整统计说明 ↗</a></div>
+    <p id="accessStatus" class="access-status" role="status" aria-live="polite" tabindex="-1">正在载入进入页面…</p>
+    <noscript><p class="access-status">此工具需要 JavaScript 才能确认统计权限并计算报价。当前无法进入。</p></noscript>
+    <div class="access-actions"><button id="denyAccess" type="button" disabled>不同意，暂不使用</button><button id="grantAccess" class="access-primary" type="button" disabled>同意统计并进入</button></div>
+    <p class="access-caption">不同意或撤回统计权限时，无法使用在线报价工具。进入后可在页面底部管理统计权限。</p>
+  </div></section>
+  <div id="quoteWorkspace" hidden inert>
   <aside class="sidebar">
     <a class="brand" href="#"><span class="brand-mark">轻</span><span>轻报<span class="brand-en">QINGBAO</span></span></a>
     <div class="workspace-label">光储业务工作台</div>
@@ -50,6 +61,6 @@
   <dialog id="quoteDialog" class="quote-dialog"><div class="dialog-heading no-print"><div><span class="eyebrow">QUOTATION</span><h2>报价单预览</h2></div><button class="icon-button" data-close="quoteDialog" aria-label="关闭报价单">×</button></div><div id="quoteContent"></div><div class="dialog-actions no-print"><button class="button secondary" id="copyBtn">复制报价</button><button class="button secondary" id="downloadBtn">导出 CSV</button><button class="button primary" id="printBtn">打印 / 保存 PDF</button></div><p class="quote-note no-print">展示产品、功率 / 容量、最终报价及单片金额，不包含成本与利润点。</p></dialog>
   <dialog id="confirmDialog" class="confirm-dialog"><h2 id="confirmTitle"></h2><p id="confirmMessage"></p><div class="dialog-actions"><button class="button secondary" id="confirmCancel">取消</button><button class="button primary" id="confirmOk">确认</button></div></dialog>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  </div>
   <script src="analytics-config.js"></script><script src="analytics.js"></script>
-  <script src="calc.js"></script><script src="app.js"></script>
 </body></html>
