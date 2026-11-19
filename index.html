@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#126b52">
+  <meta name="description" content="光储产品批量报价工具，按品类自动匹配计算公式，自由添加产品，实时生成报价。">
+  <title>轻报 · 光储产品报价</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="#"><span class="brand-mark">轻</span><span>轻报<span class="brand-en">QINGBAO</span></span></a>
+    <div class="workspace-label">光储业务工作台</div>
+    <div class="nav-active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="5" y="3" width="14" height="18" rx="3"/><path d="M8 7h8M8 11h2m4 0h2m-8 4h2m4 0h2"/></svg>产品报价</div>
+    <div class="sidebar-note"><div class="sun-icon">☀</div><strong>让每一份报价<br>都简单一点。</strong><p>专为光伏与储能产品打造</p><div class="solar-art" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+    <div class="sidebar-bottom"><span class="local-icon">⌑</span><div>本地草稿<span>仅保存在当前浏览器</span></div></div>
+  </aside>
+  <div class="main-shell">
+    <header class="topbar"><span>工作台 <span class="slash">/</span> <strong>产品报价</strong></span><span class="save-status" id="saveStatus">草稿自动保存</span></header>
+    <main>
+      <div class="page-heading"><div><div class="eyebrow">SOLAR & ENERGY STORAGE</div><h1>每一笔成本，清晰报价<span class="heading-dot">。</span></h1><p>输入成本，选好品类，剩下的交给轻报。</p></div><button class="button secondary" id="resetBtn"><span aria-hidden="true">↻</span> 新建报价</button></div>
+      <section class="settings card" aria-labelledby="settingsTitle">
+        <div class="section-intro"><span class="section-icon">≋</span><div><h2 id="settingsTitle">报价设置</h2><p>统一汇率，逐项计算</p></div></div>
+        <div class="settings-fields">
+          <label class="field currency-field">报价币种<select id="currency"><option value="USD">USD · 美元</option><option value="EUR">EUR · 欧元</option><option value="CNY">CNY · 人民币</option><option value="GBP">GBP · 英镑</option><option value="AUD">AUD · 澳元</option><option value="HKD">HKD · 港币</option><option value="JPY">JPY · 日元</option></select></label>
+          <label class="field rate-field"><span>汇率 <span class="required">*</span></span><div class="input-unit"><input id="rate" inputmode="decimal" autocomplete="off" placeholder="例如 7.20" aria-describedby="rateHelp rateError"><span>CNY</span></div><span class="field-help" id="rateHelp">1 USD = 所填金额 CNY</span></label>
+          <label class="field default-profit">默认利润点 <span class="muted inline-note">（%）</span><div class="input-unit"><span class="prefix">%</span><input id="defaultProfit" inputmode="decimal" value="18" autocomplete="off" aria-describedby="profitHelp"></div><span class="field-help" id="profitHelp">输入 18 → ×1.18，用于新增行</span></label>
+        </div>
+        <p class="error settings-error" id="rateError" role="status"></p>
+        <div class="settings-foot"><span><span class="info-circle">i</span> 汇率手动填写；更改汇率后，所有报价实时更新。</span><button class="text-button" id="applyProfit">将默认利润点应用到全部</button></div>
+      </section>
+      <div class="content-grid">
+        <section class="products card" aria-labelledby="productsTitle">
+          <div class="card-heading"><div><h2 id="productsTitle">产品明细 <span class="count-badge" id="rowCount">5 项</span></h2><p>按品类自动匹配公式，可逐项调整利润点</p></div><button class="text-button" id="categoryBtn"><span aria-hidden="true">⊞</span> 管理品类</button></div>
+          <div class="product-table"><div class="table-head"><span>产品品类 / 名称</span><span>功率 / 容量</span><span>报价成本 <small>CNY</small></span><span>利润点 <small>%</small></span><span class="align-right">最终报价 <small id="tableCurrency">USD</small></span><span class="align-right">单片组件金额</span><span></span></div><div id="rows"></div></div>
+          <div class="add-area"><button id="addBtn" class="add-button"><span aria-hidden="true">＋</span> 添加产品</button><span>数量不限，按需添加</span></div>
+          <div class="table-footer"><span id="completeCount">0 项已完成报价</span><span>组件按单瓦成本报价，单片金额 = 功率瓦数 × 单瓦报价</span></div>
+        </section>
+        <aside class="right-column">
+          <section class="summary-card" aria-labelledby="summaryTitle"><div class="summary-top"><h2 id="summaryTitle">报价汇总</h2><span class="summary-icon" aria-hidden="true">↗</span></div><p class="summary-label">报价合计 <span id="summaryCurrency">USD</span></p><div class="total-value" id="total">0.00</div><div class="summary-divider"></div><div class="summary-line"><span>已报价产品</span><strong id="summaryCount">0 / 5 项</strong></div><div class="summary-line"><span>已报价成本合计</span><strong id="costTotal">¥ 0.00</strong></div><p class="summary-hint" id="summaryHint">填写汇率与成本，开始第一笔报价</p><button class="button generate-button" id="generateBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 3h7l4 4v14H6V3h1Z"/><path d="M14 3v5h5M9 12h6m-6 4h6"/></svg>生成报价单</button><span class="summary-caption">自动汇总已填写的产品</span></section>
+          <section class="formula-card"><h3><span class="info-circle">i</span> 计算规则</h3><div class="rule"><div class="rule-heading"><span class="rule-dot direct"></span><strong>组件 · 锂电池</strong></div><p>成本 ÷ 汇率 × (1 + 利润点%)</p></div><div class="rule"><div class="rule-heading"><span class="rule-dot tax"></span><strong>支架 · 逆变器 · 线缆 · 辅材</strong></div><p>成本 ÷ 汇率 ÷ 1.13 × (1 + 利润点%)</p></div><div class="rule-note">利润点填 18，实际乘 1.18；填 8，实际乘 1.08。新增品类可选择计算公式。</div></section>
+        </aside>
+      </div>
+      <footer class="page-footer"><span>轻报 QINGBAO <span class="footer-separator">·</span> 让报价更专注</span><span>成本与利润点仅用于计算，不出现在导出的报价单中</span></footer>
+    </main>
+  </div>
+  <dialog id="categoryDialog"><div class="dialog-heading"><div><span class="eyebrow">CATEGORIES</span><h2>管理产品品类</h2></div><button class="icon-button" data-close="categoryDialog" aria-label="关闭品类窗口">×</button></div><p class="dialog-description">预设品类自动匹配公式，也可以添加自己的品类。</p><div id="categoryList" class="category-list"></div><form id="categoryForm"><h3>新增品类</h3><label class="field">品类名称<input id="categoryName" placeholder="例如：储能柜" maxlength="40" required></label><label class="field">计算公式<select id="categoryMode"><option value="direct">成本 ÷ 汇率 × (1 + 利润点%)</option><option value="tax">成本 ÷ 汇率 ÷ 1.13 × (1 + 利润点%)</option></select></label><p class="error" id="categoryError" role="status"></p><button class="button primary" type="submit">添加品类</button></form></dialog>
+  <dialog id="quoteDialog" class="quote-dialog"><div class="dialog-heading no-print"><div><span class="eyebrow">QUOTATION</span><h2>报价单预览</h2></div><button class="icon-button" data-close="quoteDialog" aria-label="关闭报价单">×</button></div><div id="quoteContent"></div><div class="dialog-actions no-print"><button class="button secondary" id="copyBtn">复制报价</button><button class="button secondary" id="downloadBtn">导出 CSV</button><button class="button primary" id="printBtn">打印 / 保存 PDF</button></div><p class="quote-note no-print">展示产品、功率 / 容量、最终报价及单片金额，不包含成本与利润点。</p></dialog>
+  <dialog id="confirmDialog" class="confirm-dialog"><h2 id="confirmTitle"></h2><p id="confirmMessage"></p><div class="dialog-actions"><button class="button secondary" id="confirmCancel">取消</button><button class="button primary" id="confirmOk">确认</button></div></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="calc.js"></script><script src="app.js"></script>
+</body></html>
